@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Actividad 2 - Foro de comentarios</title>
+  <style nonce="{{NONCE}}">
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+    body {
+      margin: 0;
+      background: #76b852;
+      background: rgb(141,194,111);
+      background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+      font-family: "Roboto", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .forums-page {
+      width: 760px;
+      max-width: calc(100% - 32px);
+      padding: 5% 0 0;
+      margin: auto;
+    }
+    .form {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      margin: 0 auto 70px;
+      padding: 45px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      color: #333333;
+      overflow-wrap: anywhere;
+    }
+    h1 { margin: 0 0 28px; text-align: center; font-size: 28px; font-weight: 700; }
+    .profile-bar {
+      display: flex;
+      margin-bottom: 20px;
+      padding: 6px 10px;
+      background: #edf7e9;
+      border-left: 4px solid #4CAF50;
+    }
+    .profile-menu { position: relative; width: 100%; }
+    .profile-menu summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: transparent;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+    .profile-menu summary::-webkit-details-marker { display: none; }
+    .profile-menu summary::after { content: "▾"; margin-left: auto; flex-shrink: 0; color: #666666; }
+    .profile-menu[open] summary::after { content: "▴"; }
+    .profile-menu summary:hover { background: #e0efda; }
+    .profile-menu summary:focus-visible { outline: 2px solid #43A047; outline-offset: 3px; }
+    .profile-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 210px;
+      max-width: calc(100vw - 64px);
+      padding: 8px;
+      box-sizing: border-box;
+      background: #FFFFFF;
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
+    .profile-dropdown .logout-button {
+      background: #f2f2f2;
+      color: #333333;
+      text-align: left;
+      text-transform: none;
+      border-radius: 8px;
+      font-size: 15px;
+      padding: 13px 16px;
+    }
+    .profile-dropdown .logout-button:hover,
+    .profile-dropdown .logout-button:focus { background: #e5e7eb; }
+    h2 { margin: 25px 0 20px; font-size: 23px; font-weight: 700; }
+    h2 strong { font-weight: 700; }
+    h3 { margin: 20px 0 15px; font-size: 19px; font-weight: 300; }
+    h4 { margin: 0 0 14px; font-size: 17px; }
+    p { line-height: 1.6; font-size: 14px; }
+    a { color: #287a2c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    label { display: block; font-size: 14px; }
+    input:not([type="hidden"]), textarea {
+      display: block;
+      font-family: "Roboto", sans-serif;
+      background: #f2f2f2;
+      width: 100%;
+      border: 0;
+      margin: 10px 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus-visible, textarea:focus-visible { outline: 2px solid #43A047; }
+    button {
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      background: #4CAF50;
+      width: 100%;
+      border: 0;
+      padding: 15px;
+      color: #FFFFFF;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    button:hover, button:active, button:focus { background: #43A047; }
+    hr { border: 0; border-top: 1px solid #e6e6e6; margin: 28px 0; }
+    article { background: #f7f7f7; padding: 20px; }
+    article h3 { margin-top: 0; }
+    .comment-heading { color: #287a2c; }
+    article p:last-child { margin-bottom: 0; }
+    article button { margin-top: 8px; }
+    .forum-message { border-top: 1px solid #e6e6e6; padding: 18px 0; }
+    .message-form { margin-top: 18px; }
+    .message-form summary { color: #287a2c; cursor: pointer; font-size: 14px; }
+    .aviso { background: #edf7e9; padding: 14px; border-left: 4px solid #4CAF50; }
+    @media (max-width: 480px) {
+      .forums-page { padding-top: 24px; }
+      .form { padding: 25px; }
+      h1 { font-size: 24px; }
+      article { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="forums-page">
+    <div class="form">
+      <h1>Foro de comentarios</h1>
+      {{CONTENIDO}}
+    </div>
+  </main>
+  {{ALERTA}}
+</body>
+</html>

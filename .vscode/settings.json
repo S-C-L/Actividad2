@@ -1,0 +1,14 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.exclusions": ["**/herramientas/**", "**/.runtime/**"],
+    "files.watcherExclude": {
+        "**/herramientas/**": true,
+        "**/.runtime/**": true,
+        "**/target/**": true
+    },
+    "search.exclude": {
+        "herramientas": true,
+        ".runtime": true,
+        "target": true
+    }
+}

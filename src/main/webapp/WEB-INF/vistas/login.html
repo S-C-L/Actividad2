@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foro de comentarios - Iniciar sesión</title>
+  <style nonce="{{NONCE}}">
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+    .login-page {
+      width: 360px;
+      max-width: calc(100% - 32px);
+      padding: 8% 0 0;
+      margin: auto;
+    }
+    .form {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      max-width: 360px;
+      margin: 0 auto 100px;
+      padding: 45px;
+      text-align: center;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+    .form h1 { font-size: 24px; font-weight: 300; margin: 0 0 24px; }
+    .form input:not([type="hidden"]) {
+      font-family: "Roboto", sans-serif;
+      outline: 0;
+      background: #f2f2f2;
+      width: 100%;
+      border: 0;
+      margin: 0 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .form input:focus-visible { outline: 2px solid #43A047; }
+    .form button {
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      background: #4CAF50;
+      width: 100%;
+      border: 0;
+      padding: 15px;
+      color: #FFFFFF;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .form button:hover, .form button:active, .form button:focus { background: #43A047; }
+    .form .message { margin: 15px 0 0; color: #666666; font-size: 12px; }
+    .form .message a { color: #287a2c; text-decoration: none; }
+    .form .message a:hover { text-decoration: underline; }
+    .form [hidden] { display: none; }
+    .aviso { font-size: 14px; line-height: 1.5; color: #333333; margin: 0 0 20px; }
+    body {
+      margin: 0;
+      background: #76b852;
+      background: rgb(141,194,111);
+      background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+      font-family: "Roboto", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (max-width: 400px) { .form { padding: 28px; } }
+  </style>
+</head>
+<body>
+  <main class="login-page">
+    <div class="form">
+      <h1>Foro de comentarios</h1>
+      {{AVISO}}
+      <form class="register-form" method="post" action="{{RUTA}}" hidden>
+        <input type="hidden" name="accion" value="registro">
+        <input type="hidden" name="csrf" value="{{CSRF}}">
+        <input type="text" name="nombre" placeholder="Nombre completo" aria-label="Nombre completo" autocomplete="name" maxlength="100" required>
+        <input type="text" name="usuario" placeholder="Usuario" aria-label="Usuario para registrarse" autocomplete="username" minlength="3" maxlength="50" pattern="[A-Za-z0-9_.\-]{3,50}" title="De 3 a 50 caracteres: letras, números, punto, guion o guion bajo" required>
+        <input type="password" name="clave" placeholder="Contraseña (mínimo 8 caracteres)" aria-label="Contraseña para registrarse" autocomplete="new-password" minlength="8" maxlength="128" required>
+        <button type="submit">Crear cuenta</button>
+        <p class="message">¿Ya estás registrado? <a href="#iniciar-sesion">Inicia sesión</a></p>
+      </form>
+      <form class="login-form" method="post" action="{{RUTA}}">
+        <input type="hidden" name="accion" value="entrar">
+        <input type="hidden" name="csrf" value="{{CSRF}}">
+        <input type="text" name="usuario" placeholder="Usuario" aria-label="Usuario" autocomplete="username" maxlength="50" required>
+        <input type="password" name="clave" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password" maxlength="128" required>
+        <button type="submit">Iniciar sesión</button>
+        <p class="message">¿No estás registrado? <a href="#crear-cuenta">Crea una cuenta</a></p>
+      </form>
+      <noscript>Para registrar una cuenta, activa JavaScript. Puedes iniciar sesión sin él.</noscript>
+    </div>
+  </main>
+  <script nonce="{{NONCE}}">
+    // Equivalente al toggle de jQuery, sin instalar librerías y solo para estos dos formularios.
+    const login = document.querySelector('.login-form');
+    const registro = document.querySelector('.register-form');
+    function mostrarFormulario() {
+      const crear = location.hash === '#crear-cuenta';
+      login.hidden = crear;
+      registro.hidden = !crear;
+      const visible = crear ? registro : login;
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        visible.animate([{ opacity: 0, transform: 'translateY(8px)' },
+                         { opacity: 1, transform: 'translateY(0)' }],
+                        { duration: 300, easing: 'ease' });
+      }
+    }
+    window.addEventListener('hashchange', mostrarFormulario);
+    mostrarFormulario();
+  </script>
+</body>
+</html>

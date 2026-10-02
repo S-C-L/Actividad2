@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Actividad 2: compilar",
+            "type": "process",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/compilar.sh"],
+            "group": {"kind": "build", "isDefault": true},
+            "problemMatcher": []
+        },
+        {
+            "label": "Actividad 2: iniciar Tomcat",
+            "type": "process",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/iniciar.sh"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Actividad 2: detener Tomcat",
+            "type": "process",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/detener.sh"],
+            "problemMatcher": []
+        }
+    ]
+}
