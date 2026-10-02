@@ -1,6 +1,3 @@
--- Ejecutar desde la pestaña SQL de phpMyAdmin en XAMPP.
--- Compatible con MySQL 8 y MariaDB de XAMPP.
--- No elimina tablas ni datos existentes.
 CREATE DATABASE IF NOT EXISTS db_actividad2
     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE db_actividad2;
@@ -9,7 +6,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     usuario VARCHAR(50) NOT NULL,
-    -- Texto plano solicitado para esta práctica. No usar contraseñas reales.
     password VARCHAR(128) NULL,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
@@ -39,8 +35,6 @@ CREATE TABLE IF NOT EXISTS mensajes (
     CONSTRAINT fk_mensaje_autor FOREIGN KEY (autor_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
 
--- Recuperar la bandera si fue eliminada de una tabla mensajes existente.
--- No modifica el contenido ni el estado de los mensajes ya conservados.
 SET @sql_moderacion = IF(
     (SELECT COUNT(*) FROM information_schema.COLUMNS
      WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'mensajes'

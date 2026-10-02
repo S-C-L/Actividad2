@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Properties;
 
-/** HTML, lógica y acceso a datos en un único servlet, sin capas. */
+
 @WebServlet(name = "ForosServlet", urlPatterns = {"/", "/login", "/foros", "/foros.html"})
 public class ForosServlet extends HttpServlet {
     private final SecureRandom random = new SecureRandom();
@@ -160,7 +160,6 @@ public class ForosServlet extends HttpServlet {
                         }
                         sesion.setAttribute("publicacionCorrecta", true);
                     } else if ("marcarInapropiado".equals(accion)) {
-                        // La autorización se comprueba en la BD, no solo ocultando el botón.
                         try (PreparedStatement ps = c.prepareStatement(
                                 "UPDATE mensajes m JOIN foros f ON f.id=m.foro_id "
                                 + "SET m.inapropiado=1 WHERE m.id=? AND f.creador_id=? AND m.inapropiado=0")) {
@@ -207,7 +206,6 @@ public class ForosServlet extends HttpServlet {
                 "INSERT INTO usuarios (nombre,usuario,password) VALUES (?,?,?)")) {
             ps.setString(1, nombre);
             ps.setString(2, usuario);
-            // Texto plano exclusivamente para la práctica académica.
             ps.setString(3, clave);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -309,7 +307,6 @@ public class ForosServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter(nombre));
             if (id > 0) return id;
         } catch (NumberFormatException e) {
-            // Los identificadores recibidos deben ser enteros positivos.
         }
         throw new IllegalArgumentException("Identificador inválido.");
     }
@@ -372,5 +369,4 @@ public class ForosServlet extends HttpServlet {
     private String multilinea(String valor) {
         return html(valor).replace("\r\n", "\n").replace("\r", "\n").replace("\n", "<br>");
     }
-
 }
